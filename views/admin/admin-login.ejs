@@ -1,0 +1,74 @@
+<%- include("../../views/partials/admin/header") %>
+    <section class="ftco-section">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="wrap d-md-flex">
+                        <div class="text-wrap p-4 p-lg-5 d-flex img d-flex align-items-end"
+                            style="background-image: url(/assets/admin/images/adminpic3.jpg);">
+                            <div class="text w-100">
+                                <h2 class="mb-4">Welcome to Login page</h2>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and
+                                    Consonantia,
+                                    there live the blind texts.</p>
+                            </div>
+                        </div>
+
+                        <div class="login-wrap p-4 p-md-5">
+                            <h3 class="mb-3" style="font-weight: 600;">Admin Login</h3>
+                           
+
+                                    <form method="post" action="/admin/login" class="signup-form" id="signform">
+                                        <div class="row">
+                                      
+
+                                            <div class="col-md-12">
+                                                <p class="p1">Only admins are allowed to login through this interface</p>
+                                           <div class="line1"></div>
+                                                <div class="form-group">
+                                                    <label class="label" for="email">Email Address</label>
+                                                    <input type="email" class="form-control" name="email"
+                                                         id="email"
+                                                        placeholder="Enter email">
+                                                    <div id="error1" class="error-message"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="password">Password</label>
+                                                    <input type="password" id="password" class="form-control"
+                                                        name="password" placeholder="Password">
+                                                    <div id="error2" class="error-message"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 my-2">
+                                                <div class="form-group">
+                                                    <div class="w-100">
+                                                        <label class="checkbox-wrap checkbox-primary" >
+                                                            <a style="color: rgb(12, 120, 202);">Forgot Password ?</a>
+
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <div class="form-group ">
+                                                    <button type="submit"
+                                                        class="btn btn-secondary submit ">Login</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include("../../views/partials/admin/footer") %>

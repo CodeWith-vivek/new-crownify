@@ -1,0 +1,86 @@
+<%- include("../../views/partials/user/header2") %>
+    <section class="ftco-section">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="wrap d-md-flex">
+                    <div class="text-wrap p-4 p-lg-5 d-flex img d-flex align-items-end"
+                        style="background-image: url(assets/images/loginpic.webp);">
+                        <div class="text w-100">
+                            <h2 class="mb-4">Welcome to Login page</h2>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and
+                                Consonantia,
+                                there live the blind texts.</p>
+                        </div>
+                    </div>
+
+                        <div class="login-wrap p-4 p-md-5">
+                            <h3 class="mb-3" style="font-weight: 600;">Login</h3>
+                            <% if (messages.error) { %>
+                                <div style="color: red;">
+                                    <%= messages.error %>
+                                </div>
+                                <% } %>
+
+
+                                    <form method="post" action="/login" class="signup-form" id="signform">
+                                        <div class="row">
+                                
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="email">Email Address</label>
+                                                    <input type="email" class="form-control" name="email" value="<%= data ? data.email : '' %>" id="email"
+                                                        placeholder="Enter email">
+                                                    <div id="error1" class="error-message"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="password">Password</label>
+                                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password">
+                                                    <div id="error2" class="error-message"></div>
+                                                </div>
+                                            </div>
+                                 
+                                            <div class="col-md-12 my-4">
+                                                <div class="form-group">
+                                                    <div class="w-100">
+                                                        <label class="checkbox-wrap checkbox-primary">
+                                                            <a>Forgot Password ?</a>
+                                                            
+                                                        </label>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <div class="form-group ">
+                                                    <button type="submit" class="btn btn-secondary submit ">Login</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                    <div class="social-wrap">
+                                        <p class="or">
+                                            <span>or</span>
+                                        </p>
+                                        <p class="mb-3 text-center">Signin with this Google</p>
+                                        <p class="social-media d-flex justify-content-center">
+                                            <a href="/auth/google"
+                                                class="social-icon google d-flex align-items-center justify-content-center"><span
+                                                    class="fa fa-google"></span></a>
+                                        </p>
+                                    </div>
+                                    <div class="w-100 text-center">
+                                        <p class="mt-4">Don't have an account? <a href="/signup">Sign up here</a></p>
+                                    </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include("../../views/partials/user/footer") %>
