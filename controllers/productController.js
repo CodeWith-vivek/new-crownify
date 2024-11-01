@@ -27,7 +27,6 @@ const addProducts = async (req, res) => {
       const images = [];
       const uploadDir = path.join(__dirname, "../public/uploads/product-image");
 
-      // Check and create directory if not exists
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
       }
@@ -40,13 +39,12 @@ const addProducts = async (req, res) => {
           }`;
           const resizedImagePath = path.join(uploadDir, uniqueFilename);
 
-          // Resize and save image
           await sharp(originalImagePath)
             .resize({ width: 440, height: 440, fit: "cover" })
             .toFile(resizedImagePath);
 
           images.push(uniqueFilename);
-          fs.unlinkSync(originalImagePath); // Optionally delete original image
+          fs.unlinkSync(originalImagePath);
         }
       }
 
@@ -64,7 +62,7 @@ const addProducts = async (req, res) => {
         salePrice: products.salePrice,
         createdOn: new Date(),
         quantity: products.quantity,
-        size: products.size, // Handle size field
+        size: products.size,
         color: products.color,
         productImage: images,
         status: "Available",
@@ -86,7 +84,7 @@ const addProducts = async (req, res) => {
 const getAllProducts = async (req, res) => {
   try {
     const search = req.query.search || "";
-    const page = parseInt(req.query.page) || 1; // Convert page to integer
+    const page = parseInt(req.query.page) || 1;
     const limit = 2;
 
     const productData = await Product.find({
@@ -215,12 +213,10 @@ const editProduct = async (req, res) => {
     });
 
     if (existingProduct) {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Product with this name already exists. Please try with another name",
-        });
+      return res.status(400).json({
+        error:
+          "Product with this name already exists. Please try with another name",
+      });
     }
 
     const images = [];
@@ -251,7 +247,7 @@ const editProduct = async (req, res) => {
       regularPrice: data.regularPrice,
       salePrice: data.salePrice,
       quantity: data.quantity,
-      size: data.size, // Handle size field
+      size: data.size,
       color: data.color,
     };
 

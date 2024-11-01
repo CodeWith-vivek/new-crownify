@@ -14,21 +14,24 @@ const securePassword=async(password)=>{
     
   }
 }
+
+//for loading homepage
+
 const loadHomepage = async (req, res) => {
   try {
     const user = req.session.user;
-    console.log("Session user ID:", user);
+  
 
-    // Fetch products from the database
-    const products = await Product.find({ isBlocked: false }); // Adjust the query as needed
+    
+    const products = await Product.find({ isBlocked: false }); 
 
     if (user) {
       const userData = await User.findOne({ _id: user });
-      console.log("User  data fetched:", userData);
-      // Pass both user data and products to the view
+     
+   
       return res.render("Home", { user: userData, products });
     } else {
-      // Pass only products to the view if no user is logged in
+      
       return res.render("Home", { products });
     }
   } catch (error) {
@@ -36,6 +39,9 @@ const loadHomepage = async (req, res) => {
     res.status(500).send("server error");
   }
 };
+
+//page not found
+
 const pageNotFound = async (req, res) => {
   try {
     res.render("page-404");
@@ -43,11 +49,13 @@ const pageNotFound = async (req, res) => {
     res.redirect("/pageNotFound");
   }
 };
+
+// load signup page
+
 const loadSignup = async (req, res) => {
   try {
      const userData = req.session.userData || {};
 
-     // Clear session data after retrieving it
      req.session.userData = null;
      const messages = req.flash("error"); 
      
@@ -57,11 +65,14 @@ const loadSignup = async (req, res) => {
     res.status(500).send("server error");
   }
 };
+
+//otp page load
+
 const loadOtpverify=async(req,res)=>{
   try{
      const userData = req.session.userData;
       if (!userData) {
-        return res.redirect("/signup"); // Redirect to signup if data is missing
+        return res.redirect("/signup"); 
       }
     res.render("verify-otp",{userData})
   }catch(error){
@@ -119,38 +130,41 @@ async function sendVerificationEmail(email,otp){
 
   }
 }
+
+//sign up function
+
 const signup =async(req,res)=>{
   try{
     const {name,phone,email,password,cPassword}=req.body;
-     console.log("Signup request body:", req.body);
+  
     
     if(password !==cPassword){
-         console.log("Passwords do not match");
+         
       
       req.flash("error", "Passwords do not match");
        req.session.userData = { name, phone, email };
        return req.session.save((err) => {
          if (err) console.log("Session save error:", err);
-        return res.redirect("/signup"); // Ensure return to prevent further execution
+        return res.redirect("/signup");
        });
      
 
     }
 
      const existingUser = await User.findOne({ email });
-      console.log("Existing user:", existingUser);
+    
 
      if (existingUser) {
-       // If the user exists, check if they signed up with Google
+      
        if (existingUser.googleId) {
-         console.log("User registered via Google");
+        
          req.flash(
            "error",
            "User  with this email already registered via Google."
          );
          return res.redirect("/signup")
        } else {
-          console.log("User already exists");
+         
          req.flash("error", "User  with this email already exists.");
           return res.redirect("/signup");
        }
@@ -158,15 +172,15 @@ const signup =async(req,res)=>{
        }
      
     const otp=generateOtp()
-    console.log("otp",otp);
+    
      
     
     const emailSent=await sendVerificationEmail(email,otp)
-    console.log("email,otp",emailSent);
+   
     
     if (emailSent) {
       const hashedPassword = await securePassword(password);
-      // Check if email sent successfully
+     
       req.session.userOtp = otp;
       req.session.userData = { name,phone,email, password:hashedPassword };
      return  res.redirect("/verify-otp");
@@ -200,7 +214,6 @@ const verifyOtp = async (req, res) => {
     const sessionOtp = req.session.userOtp;
 
     if (otp === sessionOtp) {
-      // OTP matches, save the user
      
 
       const user = req.session.userData;
@@ -216,7 +229,7 @@ const verifyOtp = async (req, res) => {
   
  
 
-      // Clear session data
+   
       req.session.userOtp = null;
       req.session.userData = null;
 
@@ -231,18 +244,18 @@ const verifyOtp = async (req, res) => {
 };
 const resendOtp = async (req, res) => {
   try {
-    const userData = req.session.userData; // Retrieve the user data from the session
+    const userData = req.session.userData; 
     if (!userData) {
       return res
         .status(400)
         .json({ success: false, message: "User data not found." });
     }
 
-    const newOtp = generateOtp(); // Generate a new OTP
-    const emailSent = await sendVerificationEmail(userData.email, newOtp); // Send the new OTP via email
+    const newOtp = generateOtp(); 
+    const emailSent = await sendVerificationEmail(userData.email, newOtp); 
 
     if (emailSent) {
-      req.session.userOtp = newOtp; // Store the new OTP in the session
+      req.session.userOtp = newOtp; 
       return res.json({
         success: true,
         message: "New OTP sent to your email.",
@@ -272,7 +285,7 @@ const login=async(req,res)=>{
   try{
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
-    console.log("Existing user:", existingUser);
+    
     if (!existingUser) {
       req.flash("error", "User not registered.");
       return res.redirect("/login");
@@ -291,10 +304,10 @@ const login=async(req,res)=>{
        existingUser.status =
          existingUser.lastLogin >= sixMonthsAgo ? "Active" : "Inactive";
 
-       // Save the updated user details
+      
        await existingUser.save();
     req.session.user = existingUser._id;
-    console.log("User logged in:", existingUser._id); // Log the user ID
+   
     res.redirect("/");
   }catch(error){
     console.log("login error",error);
@@ -328,45 +341,42 @@ res.redirect("/pageNotFound")
 
 const loadShopPage = async (req, res) => {
   try {
-    let search = "";
-    if (req.query.search) {
-      search = req.query.search;
-    }
-
-    // Define pagination variables
+    let search = req.query.search || "";
+   
     const page = parseInt(req.query.page) || 1;
-    const limit = 12; // Number of products per page
+    const limit = 12; 
 
-    // Fetch filtered and paginated products
+  
     const products = await Product.find({
       isBlocked: false,
-      productName: { $regex: ".*" + search + ".*", $options: "i" }, // Case-insensitive search
+      productName: { $regex: ".*" + search + ".*", $options: "i" }, 
     })
       .limit(limit)
       .skip((page - 1) * limit)
       .exec();
 
-    // Fetch categories and brands
+   
     const categories = await Category.find();
     const brands = await Brand.find({ isBlocked: false });
 
-    // Gather unique sizes across all products
+   
     const uniqueSizes = [
       ...new Set(products.flatMap((product) => product.size || [])),
     ];
 
-    // Count total matching products for pagination
+  
     const count = await Product.countDocuments({
       isBlocked: false,
       productName: { $regex: ".*" + search + ".*", $options: "i" },
     });
+
     const userId = req.session.user;
     let userData = null;
     if (userId) {
       userData = await User.findOne({ _id: userId });
     }
 
-    // Render the shop page with pagination data
+  
     return res.render("Shop", {
       user: userData,
       products,
@@ -376,50 +386,50 @@ const loadShopPage = async (req, res) => {
       search,
       currentPage: page,
       totalPages: Math.ceil(count / limit),
+      productsPerPage: limit,
+      totalProducts: count,
     });
   } catch (error) {
     console.log("Shop page not found", error);
     res.status(500).send("server error");
   }
 };
-
 const loadProductDetails = async (req, res) => {
   try {
     const productId = req.params.id;
     const product = await Product.findById(productId).exec();
 
-    // Check if the product exists
+  
     if (!product) {
       return res.status(404).send("Product not found");
     }
 
-    // Ensure product.color is an array; default to an empty array if not
+   
     if (!Array.isArray(product.color)) {
       product.color = [];
     }
 
-    // Fetch related products from the same brand, excluding the current product
+  
     const relatedProducts = await Product.find({
       brand: product.brand,
-      _id: { $ne: productId }, // Exclude the current product
+      _id: { $ne: productId }, 
     })
-      .limit(4) // Limit to 4 related products
+      .limit(4) 
       .exec();
 
-    // Retrieve the session user, if available
+   
     const userId = req.session.user;
     if (userId) {
       const user = await User.findById(userId);
-      console.log("User data fetched:", user);
-
-      // Render the view with user data, product, and related products
+     
+    
       return res.render("ProductDetails", {
         user,
         product,
         relatedProducts,
       });
     } else {
-      // Render the view without user data
+    
       return res.render("ProductDetails", {
         product,
         relatedProducts,

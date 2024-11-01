@@ -39,6 +39,41 @@
     <link rel="stylesheet" href="/assets/usershop/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/usershop/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/usershop/css/style.css" type="text/css">
+    <style>
+        .pagination .page-item .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    font-weight: bold;
+    color: #333;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    cursor: not-allowed;
+    border-color: #ddd;
+}
+
+.pagination .page-link.rounded-circle {
+    border-radius: 50%;
+}
+    </style>
     
 
 

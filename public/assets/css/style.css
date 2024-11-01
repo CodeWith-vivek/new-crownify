@@ -6079,7 +6079,7 @@ input.checkbox {
 .home5-cosmetic .hero .btn,
 .home5-cosmetic .product-single .btn,
 .footer-5 .footer-newsletter .btn {
-  background-color: #ff708e;
+  background-color: #ee1616;
 }
 
 .featured-column .text-center h3 {
@@ -7282,7 +7282,8 @@ body.home15-funiture-template {
   33. Footer
 ========================================================================*/
 #footer {
-  margin-top: 35px;
+  padding-top: 35px;
+  background-color: black;
 }
 
 .footer-2 .site-footer {
@@ -7368,13 +7369,13 @@ body.home15-funiture-template {
 }
 
 .footer-5 .site-footer {
-  background-color: #fff;
+  background-color: #000000;
   border-top: 1px solid #eeeeee;
 }
 
 .footer-5 .footer-top h4,
 .footer-5 .footer-top .h4 {
-  color: #000000;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 400;
   margin-bottom: 15px;
@@ -7396,7 +7397,7 @@ body.home15-funiture-template {
 .footer-5 .footer-top p,
 .footer-5 .footer-bottom,
 .footer-5 .footer-bottom a {
-  color: #000;
+  color: #ffffff;
 }
 
 .footer-5 .addressFooter .icon {

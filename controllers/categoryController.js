@@ -1,7 +1,7 @@
 const Category = require("../models/categorySchema");
 const Product = require("../models/productSchema");
 
-// Pagination for category info
+
 const categoryInfo = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -82,7 +82,7 @@ const addCategoryOffer = async (req, res) => {
     for (const product of products) {
       product.salePrice =
         product.regularPrice - (product.regularPrice * percentage) / 100;
-      product.productOffer = 0; // Resetting individual product offer if there's a category offer
+      product.productOffer = 0; 
       await product.save();
     }
 
@@ -106,8 +106,8 @@ const removeCategoryOffer = async (req, res) => {
 
     const products = await Product.find({ category: category._id });
     for (const product of products) {
-      product.salePrice = product.regularPrice; // Resetting sale price to original
-      product.productOffer = 0; // Resetting product offer
+      product.salePrice = product.regularPrice;
+      product.productOffer = 0;
       await product.save();
     }
 
@@ -158,7 +158,7 @@ const editCategory = async (req, res) => {
     const id = req.params.id;
     const { categoryName, description } = req.body;
 
-    // Check if category with the new name already exists
+  
     const existingCategory = await Category.findOne({ name: categoryName });
     if (existingCategory && existingCategory._id.toString() !== id) {
       return res
@@ -166,7 +166,7 @@ const editCategory = async (req, res) => {
         .json({ error: "Category exists, please choose another name" });
     }
 
-    // Update the category
+    
     const updateCategory = await Category.findByIdAndUpdate(
       id,
       {
@@ -182,7 +182,7 @@ const editCategory = async (req, res) => {
       res.status(400).json({ error: "Category not found" });
     }
   } catch (error) {
-    console.log(error); // Log error for debugging
+    console.log(error); 
     res.status(500).json({ error: "Internal error" });
   }
 };

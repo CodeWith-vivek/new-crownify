@@ -164,7 +164,11 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__left">
-                                    <p>Showing 1–12 of <%= products.length %> results</p>
+                                    <p>Showing
+                                        <%= (currentPage - 1) * productsPerPage + 1 %>–
+                                            <%= Math.min(currentPage * productsPerPage, totalProducts) %>
+                                                of <%= totalProducts %> results
+                                    </p>
                                 </div>
                             </div>
 
@@ -205,13 +209,10 @@
                                                     <% } %>
                                             </div>
                                             <h5>
-                                                <% if (product.isOnSale) { %>
-                                                    <span style="text-decoration: line-through;">₹<%=
-                                                            product.regularPrice.toFixed(2) %></span>
-                                                    ₹<%= product.salePrice.toFixed(2) %>
-                                                        <% } else { %>
-                                                            ₹<%= product.regularPrice.toFixed(2) %>
-                                                                <% } %>
+                                            
+                                                ₹<%= product.salePrice.toFixed(2) %><span  style="padding-left: 10px;   text-decoration: line-through; color: rgb(179, 179, 179); font-size: 0.9em; margin-right: 8px;">₹<%= product.regularPrice.toFixed(2) %>
+                                                        </span>
+                                                
                                             </h5>
                                             <div class="product__color__select" onclick="event.stopPropagation();">
                                                 <% if (product.colors && product.colors.length> 0) { %>
@@ -221,7 +222,7 @@
                                                         </label>
                                                         <% }); %>
                                                             <% } else { %>
-                                                                <p>No colors available</p>
+                                                                <p></p>
                                                                 <% } %>
                                             </div>
                                         </div>
@@ -233,7 +234,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="product__pagination mt-3 mb-4">
-                                <nav aria-label="Page navigation example">
+                                <nav aria-label="Page navigation">
                                     <ul class="pagination justify-content-center">
                                         <% if (totalPages> 1) { %>
 
@@ -284,38 +285,34 @@
                                                                             <% } %>
 
                                                                                 <!-- Last Page -->
-                                                                                <% if (totalPages> 1) { %>
-                                                                                    <li
-                                                                                        class="page-item <%= (currentPage === totalPages) ? 'active' : '' %>">
+                                                                                <li
+                                                                                    class="page-item <%= (currentPage === totalPages) ? 'active' : '' %>">
+                                                                                    <a class="page-link rounded-circle"
+                                                                                        href="?page=<%= totalPages %>">
+                                                                                        <%= totalPages.toString().padStart(2, '0'
+                                                                                            ) %>
+                                                                                    </a>
+                                                                                </li>
+
+                                                                                <!-- Next Arrow -->
+                                                                                <% if (currentPage < totalPages) { %>
+                                                                                    <li class="page-item">
                                                                                         <a class="page-link rounded-circle"
-                                                                                            href="?page=<%= totalPages %>">
-                                                                                            <%= totalPages.toString().padStart(2, '0'
-                                                                                                ) %>
+                                                                                            href="?page=<%= currentPage + 1 %>"
+                                                                                            aria-label="Next">
+                                                                                            <span
+                                                                                                aria-hidden="true">&raquo;</span>
                                                                                         </a>
                                                                                     </li>
-                                                                                    <% } %>
+                                                                                    <% } else { %>
+                                                                                        <li class="page-item disabled">
+                                                                                            <span
+                                                                                                class="page-link rounded-circle"
+                                                                                                aria-hidden="true">&raquo;</span>
+                                                                                        </li>
+                                                                                        <% } %>
 
-                                                                                        <!-- Next Arrow -->
-                                                                                        <% if (currentPage < totalPages)
-                                                                                            { %>
-                                                                                            <li class="page-item">
-                                                                                                <a class="page-link rounded-circle"
-                                                                                                    href="?page=<%= parseInt(currentPage) + 1 %>"
-                                                                                                    aria-label="Next">
-                                                                                                    <span
-                                                                                                        aria-hidden="true">&raquo;</span>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <% } else { %>
-                                                                                                <li
-                                                                                                    class="page-item disabled">
-                                                                                                    <span
-                                                                                                        class="page-link rounded-circle"
-                                                                                                        aria-hidden="true">&raquo;</span>
-                                                                                                </li>
-                                                                                                <% } %>
-
-                                                                                                    <% } %>
+                                                                                            <% } %>
                                     </ul>
                                 </nav>
                             </div>

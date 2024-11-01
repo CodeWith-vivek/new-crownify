@@ -54,7 +54,7 @@
                                     <% } %>
                                         <span> - <%= product.reviewsCount %> Reviews</span>
                             </div>
-                            <h3>$<%= product.regularPrice.toFixed(2) %> <span>$<%= product.salePrice.toFixed(2) %>
+                            <h3>₹<%= product.salePrice.toFixed(2) %><span>₹<%= product.regularPrice.toFixed(2) %>
                                     </span>
                             </h3>
                             <p>
@@ -93,7 +93,7 @@
                             </div>
                             <div class="product__details__last__option">
                                 <h5><span>Guaranteed Safe Checkout</span></h5>
-                                <img src="img/shop-details/details-payment.png" alt="">
+                                <img src="/assets/usershop/img/shop-details/details-payment.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -122,11 +122,8 @@
                             <span class="label">New</span>
                             <ul class="product__hover">
                                 <li><a href="#" onclick="event.preventDefault(); event.stopPropagation();"><img
-                                            src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#" onclick="event.preventDefault(); event.stopPropagation();"><img
-                                            src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#" onclick="event.preventDefault(); event.stopPropagation();"><img
-                                            src="img/icon/search.png" alt=""></a></li>
+                                            src="/assets/usershop/img/icon/heart.png" alt=""></a></li>
+                                
                             </ul>
                         </div>
                         <div class="product__item__text">
@@ -153,7 +150,7 @@
                                         </label>
                                         <% }) %>
                                             <% } else { %>
-                                                <p>No colors available for this product.</p>
+                                                <p></p>
                                                 <% } %>
                             </div>
                         </div>
