@@ -156,49 +156,43 @@
 
         <script>
             function handleFormSubmit(event) {
-                event.preventDefault()
-                if (!validateForm()) {
-                    return
-                }
-                const name = document.getElementsByName("name")[0].value
-                const description = document.getElementById("descriptionId").value;
-                fetch("/admin/addCategory", {
-                    method: "POST",
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, description })
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(err => {
-                                throw new Error(err.error)
-                            })
-                        }
-                        return response.json();
+                    event.preventDefault();
+                    if (!validateForm()) {
+                        return;
+                    }
+                    const name = document.getElementsByName("name")[0].value;
+                    const description = document.getElementById("descriptionId").value;
+
+                    fetch("/admin/addCategory", {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({ name, description })
                     })
-                    .then(data => {
-                        location.reload()
-                    })
-                    .catch(error => {
-                        if (error.message === "Category already exists") {
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.json().then(err => {
+                                    throw new Error(err.error);
+                                });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success",
+                                text: "Category added successfully!"
+                            }).then(() => location.reload());
+                        })
+                        .catch(error => {
                             Swal.fire({
                                 icon: "error",
                                 title: "Oops",
-                                text: "Category already exists"
-
-                            })
-
-                        } else {
-                            Swal.fire({
-                                icon: "success",
-                                title: "success",
-                                text: "Category added successfully!"
-                            })
-                        }
-                    })
-
-            }
+                                text: error.message || "An error occurred"
+                            });
+                        });
+                }
 
             function validateForm() {
                 clearErrorMessage()

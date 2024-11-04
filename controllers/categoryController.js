@@ -27,25 +27,30 @@ const categoryInfo = async (req, res) => {
 
 // Adding a new category
 const addCategory = async (req, res) => {
-  const { name, description } = req.body;
+  let { name, description } = req.body;
   try {
     if (!name || !description) {
       return res
         .status(400)
         .json({ error: "Name and description are required." });
     }
+    name = name.toUpperCase();
 
-    const existingCategory = await Category.findOne({ name });
+    // Case-insensitive check for existing category
+    const existingCategory = await Category.findOne({
+      name: { $regex: new RegExp(`^${name}$`, "i") },
+    });
+
     if (existingCategory) {
-      return res.status(400).json({ error: "Category already exists" });
+      return res.status(409).json({ error: "Category already exists." });
     }
 
     const newCategory = new Category({ name, description });
     await newCategory.save();
-    res.redirect("/admin/category");
+    res.status(201).json({ message: "Category added successfully." });
   } catch (error) {
     console.error("Error adding category:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
