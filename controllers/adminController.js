@@ -14,12 +14,20 @@ const loadLogin=(req,res)=>{
 }
 const login=async(req,res)=>{
     try{
+        console.log("hello",req.body);
+        
         const {email,password}=req.body;
         const admin=await User.findOne({email,isAdmin:true});
         if(admin){
-            const passwordMatch=bcrypt.compare(password,admin.password);
+            console.log("hello2",admin);
+            
+            const passwordMatch=await bcrypt.compare(password,admin.password);
             if(passwordMatch){
+                console.log("password ",passwordMatch);
+                
                 req.session.admin=true
+               console.log("req",req.session.admin);
+
                
                 
                 return res.redirect("/admin/dashboard")

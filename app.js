@@ -24,10 +24,9 @@ app.use(session({
 }))
 app.use(flash())
 app.use((req, res, next) => {
-  res.locals.messages = req.flash();
+  res.locals.messages = { error: req.flash("error") };
   next();
 });
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

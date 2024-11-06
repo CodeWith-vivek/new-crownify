@@ -557,6 +557,7 @@ th {
 }
 
 .display-table {
+  line-height: 31px;
   display: table;
   table-layout: fixed;
   width: 100%;
@@ -7558,6 +7559,7 @@ body.home15-funiture-template {
 .footer-links ul,
 .contact-box ul {
   margin-bottom: 20px;
+  line-height: 29px;
 }
 
 .footer-links li {
