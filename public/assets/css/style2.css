@@ -11812,6 +11812,7 @@ h5,
   width: 100%;
   position: relative;
   z-index: 0;
+  line-height: 31px;
 }
 
 .text-wrap:after {
@@ -11835,6 +11836,7 @@ h5,
 @media (min-width: 992px) {
   .login-wrap {
     width: 50%;
+    line-height: 31px;
   }
 }
 
@@ -11851,6 +11853,7 @@ h5,
 .login-wrap {
   position: relative;
   background: #fff;
+  line-height: 31px;
 }
 
 .login-wrap h3 {

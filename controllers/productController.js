@@ -12,7 +12,7 @@ const getProductAddPage = async (req, res) => {
     const brand = await Brand.find({ isBlocked: false });
     res.render("product-add", { cat: category, brand: brand });
   } catch (error) {
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -120,7 +120,7 @@ const getAllProducts = async (req, res) => {
       res.render("page-404");
     }
   } catch (error) {
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -146,7 +146,7 @@ const addProductOffer = async (req, res) => {
     res.json({ status: true });
   } catch (error) {
     res.status(500).json({ status: false, message: "Internal server error" });
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -162,7 +162,7 @@ const removeProductOffer = async (req, res) => {
     await findProduct.save();
     res.json({ status: true });
   } catch (error) {
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -172,7 +172,7 @@ const blockProduct = async (req, res) => {
     await Product.updateOne({ _id: id }, { $set: { isBlocked: true } });
     res.redirect("/admin/products");
   } catch (error) {
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -182,7 +182,7 @@ const unblockProduct = async (req, res) => {
     await Product.updateOne({ _id: id }, { $set: { isBlocked: false } });
     res.redirect("/admin/products");
   } catch (error) {
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -198,7 +198,7 @@ const getEditProduct = async (req, res) => {
       brand: brand,
     });
   } catch (error) {
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -259,7 +259,7 @@ const editProduct = async (req, res) => {
     res.redirect("/admin/products");
   } catch (error) {
     console.error(error);
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 
@@ -283,7 +283,7 @@ const deleteSingleImage = async (req, res) => {
     }
     res.send({ status: true });
   } catch (error) {
-    res.redirect("/pageerror");
+    res.redirect("/admin/pageerror");
   }
 };
 

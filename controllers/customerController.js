@@ -33,6 +33,9 @@ const customerInfo=async(req,res)=>{
         });
 
     }catch(error){
+      console.log("error in loading customer info",error);
+       res.redirect("/admin/pageerror");
+      
 
     }
 }
@@ -42,7 +45,7 @@ const customerBlocked=async(req,res)=>{
        await User.updateOne({ _id: id }, { $set: { isBlocked: true } });
        res.redirect("/admin/users");
      } catch (error) {
-       res.redirect("/pageerror");
+       res.redirect("/admin/pageerror");
      }
 
 }
@@ -53,7 +56,7 @@ const customerUnblocked=async(req,res)=>{
         await User.updateOne({ _id: id }, { $set: { isBlocked: false } });
         res.redirect("/admin/users");
       } catch (error) {
-        res.redirect("/pageerror");
+        res.redirect("/admin/pageerror");
       }
 
    

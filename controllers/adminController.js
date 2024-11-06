@@ -40,7 +40,7 @@ const login=async(req,res)=>{
         }
     }catch(error){
         console.log("login error");
-        return res.redirect("/pageerror")
+        return res.redirect("/admin/pageerror")
         
     }
 }
@@ -49,7 +49,7 @@ const loadDashboard=async(req,res)=>{
         try{
             res.render("dashboard")
         }catch(error){
-            res.redirect("/pageerror")
+            res.redirect("/admin/pageerror")
 
         }
 }
@@ -59,7 +59,7 @@ const logout=async(req,res)=>{
         req.session.destroy(err=>{
             if(err){
                 console.log("Error destroying session");
-                return res.redirect("/pageerror")
+                return res.redirect("/admin/pageerror")
                 
             }
             
@@ -68,7 +68,7 @@ const logout=async(req,res)=>{
         })
     }catch(error){
         console.log("enexpected error occured",error);
-        res.redirect("/pageerror")
+        res.redirect("/admin/pageerror")
         
     }
 

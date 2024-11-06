@@ -2,9 +2,12 @@ const express=require("express")
 const router=express.Router()
 const userController =require("../controllers/userController");
 const passport = require("passport");
+const profileController =require("../controllers/profileController")
 
 
 router.get("/pageNotFound", userController.pageNotFound);
+
+//user signup managing
 
 router.get("/",userController.loadHomepage)
 router.get("/signup",userController.loadSignup)
@@ -23,9 +26,9 @@ router.get(
   }),
   async (req, res) => {
     try {
-      // User is authenticated, so log in and redirect to the homepage
-      req.session.user = req.user._id; // Save user ID in session
-      return res.redirect("/"); // Redirect to homepage or logged-in dashboard
+     
+      req.session.user = req.user._id; 
+      return res.redirect("/"); 
     } catch (error) {
       console.log("Error during Google login:", error);
       req.flash("error", "Something went wrong. Please try again.");
@@ -33,12 +36,22 @@ router.get(
     }
   }
 );
+
+//user login managing
+
 router.get("/login",userController.loadLogin)
 router.post("/login",userController.login)
+
+//shop & home logout management
+
 router.get("/logout",userController.logout)
 router.get("/shop", userController.loadShopPage);
 
 router.get("/product/:id", userController.loadProductDetails);
+
+// user profile management
+
+router.get("/forget-password")
 
 module.exports=router
 
