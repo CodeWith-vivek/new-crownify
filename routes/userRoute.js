@@ -51,7 +51,7 @@ router.get("/product/:id", userController.loadProductDetails);
 
 // user profile management
 
-router.get("/forget-password")
+router.get("/forget-password",profileController.getForgotPassPage)
 
 module.exports=router
 

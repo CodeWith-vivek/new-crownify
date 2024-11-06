@@ -11882,10 +11882,12 @@ h5,
 .form-control {
   width: calc(100% -150px);
   height: 50px;
-  background: rgba(0, 0, 0, 0.03);
+
   color: #000;
   font-size: 14px;
-  border-radius: 4px;
+  background: rgb(255 255 255 / 96%);
+    border-radius: 28px;
+ 
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
@@ -11960,7 +11962,8 @@ textarea.form-control {
 
 .social-wrap .or span {
   display: inline-block;
-  background: #fff;
+  background: #ffffff00;
+    font-weight: 600;
   padding: 0 20px;
 }
 
