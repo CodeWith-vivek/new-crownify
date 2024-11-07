@@ -3,6 +3,15 @@ const nodemailer =require("nodemailer")
 const bcrypt =require("bcrypt")
 const env= require("dotenv").config();
 const session =require("express-session")
+
+const securePassword = async (password) => {
+  try {
+    const passwordHash = await bcrypt.hash(password, 10);
+    return passwordHash;
+  } catch (error) {
+    console.log("password hash error", error);
+  }
+};
 function generateOtp(){
      return Math.floor(100000 + Math.random() * 900000).toString();
 }
@@ -161,10 +170,48 @@ const resendOtpForgot = async (req, res) => {
   }
 };
 
+const getResetPassPage=async(req,res)=>{
+  try {
+
+    res.render("reset-password")
+    
+  } catch (error) {
+    res.redirect("/pageNotFound")
+    
+  }
+
+}
+
+const forgotNewPassword=async(req,res)=>{
+
+  try {
+    const {password, cPassword}=req.body
+    const email = req.session.email;
+    if(password===cPassword){
+      const passwordHash=await securePassword(password)
+      await User.updateOne(
+        {email:email},
+        {$set:{password:passwordHash}}
+      )
+      res.redirect("/login")
+    }else{
+      res.redirect("/reset-password")
+    }
+    
+  } catch (error) {
+    console.log("error in loading page",error);
+    
+    res.redirect("/pageNotFound")
+    
+  }
+
+}
+
 module.exports={
     getForgotPassPage,
     forgotEmailValid,
     verifyOtpForgot,
     resendOtpForgot,
+    getResetPassPage,forgotNewPassword
     
 }

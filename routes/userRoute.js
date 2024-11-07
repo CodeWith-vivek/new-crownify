@@ -55,6 +55,8 @@ router.get("/forget-password",profileController.getForgotPassPage)
 router.post("/forget-email-valid",profileController.forgotEmailValid)
 router.post("/verify-otp-forgot",profileController.verifyOtpForgot);
 router.post("/resend-otp-forgot",profileController.resendOtpForgot)
+router.get("/reset-password",profileController.getResetPassPage)
+router.post("/reset-password",profileController.forgotNewPassword)
 
 module.exports=router
 
