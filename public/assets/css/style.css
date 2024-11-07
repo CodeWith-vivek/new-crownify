@@ -396,7 +396,7 @@ input,
 button,
 select,
 textarea {
-  background: transparent;
+background: #fffefec7;;
   border: 1px solid #d7d7d7;
   transition: all 0.4s ease-out 0s;
   -webkit-transition: all 0.4s ease-out 0s;
