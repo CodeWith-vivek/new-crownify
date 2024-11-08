@@ -2928,6 +2928,12 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
+    font-weight: 600;
+        padding-left: 10px;
+        padding-bottom: 8px;
+        padding-top: 8px;
+        border-radius: 10px;
+        padding-right: 10px;
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
