@@ -207,11 +207,30 @@ const forgotNewPassword=async(req,res)=>{
 
 }
 
+const userProfile=async(req,res)=>{
+  try {
+
+    const userId=req.session.user;
+    const userData=await User.findById(userId)
+    res.render("profile",{
+      user:userData,
+    })
+
+    
+  } catch (error) {
+    console.error("error for retrieve data",error)
+    res.redirect("/pageNotFound")
+  }
+
+}
+
 module.exports={
     getForgotPassPage,
     forgotEmailValid,
     verifyOtpForgot,
     resendOtpForgot,
-    getResetPassPage,forgotNewPassword
+    getResetPassPage,
+    forgotNewPassword,
+    userProfile
     
 }

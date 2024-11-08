@@ -47,13 +47,14 @@
     }
 
     .otp-input {
+        box-shadow: inset 0 0 12px -4px #888;
         width: 40px;
         height: 40px;
         font-size: 24px;
         text-align: center;
         margin: 0 5px;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 16px;
     }
 
     .timer {
@@ -63,7 +64,7 @@
     }
 
     .resend-link {
-        color: #007bff;
+        color: #10973b;
         cursor: pointer;
     }
 
@@ -99,19 +100,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="wrap d-md-flex">
-                        <div class="text-wrap p-4 p-lg-5 d-flex img d-flex align-items-end"
-                            style="background-image: url(assets/images/otpverification.webp);">
-                            <div class="text w-100">
-                                <h2 class="mb-4">Welcome to signup form</h2>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                    Consonantia,
-                                    there live the blind texts.</p>
-                            </div>
-                        </div>
+                        
 
                         <div class="right-side justify-content-center"
-                            style="background-image: url(assets/images/logindesign4.png); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                            <h2>OTP for Password Reset</h2>
+                            style="background-image: url(assets/images/forgetPass2.png); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                            <h2 class="mt-4">OTP for Password Reset</h2>
                             <p>Enter the OTP sent to <strong>
                                     <%= userData.email %>
                                 </strong></p>
@@ -135,7 +128,16 @@
                                 <div>Don't receive code? <span class="resend-link" id="resendOtp">Re-send</span></div>
                             </div>
 
-                            <button class="btn btn-primary w-100 mt-3" id="verifyOtp">Continue</button>
+                            <button class="btn btn-primary w-70 mt-3 mb-3 " style="border-radius: 6px;" id="verifyOtp">Continue</button>
+                        </div>
+                        <div class="text-wrap p-4 p-lg-5 d-flex img d-flex align-items-end"
+                            style="background-image: url(assets/images/otp2.webp);">
+                            <div class="text w-100">
+                                <h2 class="mb-4">Welcome to signup form</h2>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and
+                                    Consonantia,
+                                    there live the blind texts.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
