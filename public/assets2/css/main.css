@@ -679,7 +679,7 @@ p {
   font-weight: 400;
   line-height: 24px;
   margin-bottom: 5px;
-  color: #465b52;
+  color: rgb(30, 30, 30);
 }
 
 p:last-child {
@@ -688,6 +688,7 @@ p:last-child {
 
 a,
 button {
+  color: #744040;
   text-decoration: none;
   cursor: pointer;
 }
@@ -858,7 +859,7 @@ h5.widget-title {
 }
 
 .btn:hover {
-  color: white;
+  color: #b04040;
 }
 
 .btn-shadow-brand {
@@ -2131,9 +2132,9 @@ label {
 
 .card .card-header {
   padding: 1rem;
-  margin-bottom: 0;
-  background-color: #f7f8f9;
-  border-bottom: 1px solid #e2e9e1;
+  margin-bottom: 11px;
+  background-color: #cf8484;
+  border-bottom: 1px solid #cf8484;
 }
 
 .border-radius {
@@ -2226,7 +2227,7 @@ label {
 
 .dashboard-menu ul li a.active {
   color: #fff;
-  background-color: #5e2f2f;
+  background-color: #cf8484;
 }
 
 .dashboard-menu ul li a.active i {
@@ -9910,4 +9911,29 @@ span.fi-rs-apps {
 .zoomContainer{ z-index: 9999;}
 .zoomWindow{ z-index: 9999;}
 /*# sourceMappingURL=main.css.map */
+
+@media (min-width: 768px) and (max-width: 992px) {
+
+  /* Your CSS rules here */
+  .btn{
+    font-weight: 600;
+    font-size: 6px;
+
+  }
+  .text-warning{
+    font-size: 9px;
+  }
+  .text-success{
+    font-size:9px;
+  }
+  .fw-medium{
+    font-size: 10px;
+  }
+  .text-muted{
+    font-size: 10px;
+  }
+  .fs{
+    font-size:10px;
+  }
+}
 
